@@ -1,58 +1,49 @@
+/* 
+
+
 package main
 
-import(
-	"fmt"
-	"flag"
-	"net/http"
-	"os"
-	"time"
+import (
 	"log"
 )
 
-const(
-version = 1.1
-
-)
-
-type Application struct{
-	log* log.Logger
-	config Config
+type Config struct {
+	AppName   string
+	LogFile   string
+	LogLevel  string
 }
 
-type Config struct{
-	port int
-	env string
+type Log struct {
+	Config Config
+	Logger *log.Logger
 }
 
+func (l *Log) setupLog() error {
 
-func main(){
-var cfg Config
+	logger := log.New(file, l.Config.AppName+": ", log.LstdFlags)
 
-flag.IntVar(&cfg.port,"port",4000,"use in port http")
-flag.StringVar(&cfg.env,"enviromnent","Environment (development|staging|production","development")
-flag.Parse()
+	l.Logger = logger
 
-
-logger:=log.New(os.Stdout,"",log.Ldate|log.Ltime)
-app:=&Application{
-	config: cfg,
-	log: logger,
+	return nil
 }
 
-mux:= http.NewServeMux()
-mux.HandleFunc("/v1/healthcheck",app.healthcheckhandler)
+func main() {
+	myLog := Log{
+		Config: Config{
+			AppName:  "MyApp",
+			LogFile:  "/var/log/myapp.log",
+			LogLevel: "info",
+		},
+	}
 
+	err := myLog.setupLog()
+	if err != nil {
+		log.Fatal(err)
+	}
 
+	myLog.Logger.Println("This is a log message")
 
-srv:= &http.Server{
-	Addr: fmt.Sprintf(":%d",cfg.port),
-	Handler: mux,
-	IdleTimeout: time.Minute,
-	ReadTimeout: 10 * time.Second,
-	WriteTimeout: 30* time.Second,
+	}
 }
 
-logger.Printf("starting server %s on %s port",app.config.env,app.config.port)
-err:= srv.ListenAndServe()
-logger.Fatal(err)
-}
+*/
