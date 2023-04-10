@@ -1,3 +1,37 @@
+package main
+
+import (
+	"fmt"
+	"hakydll/app"
+	_ "net/http"
+)
+
+
+func main(){
+
+	haky:=app.Application{}
+	cfg:= haky.InitConfig()
+
+
+	
+	fmt.Println(cfg.Config.Port)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 
 
 

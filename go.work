@@ -4,6 +4,6 @@ use (
 	./cmd/api
 	./cmd/app
 	./cmd/config
-	./cmd/handlers
+	./cmd/server
 	./cmd/log
 )

@@ -15,11 +15,17 @@ type Application struct {
 
 
 
-func(a* Application)initApp() (app *Application, err error) {
+func(a* Application)InitConfig() *Application{
+
+cfg:=&config.Config{
+	Port: 4040,
+	Env: "Prod",
+}
+
+a = &Application{
+Config: cfg,
+}
 
 
-
-
-
-return a,err
+return a
 }
