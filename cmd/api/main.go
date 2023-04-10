@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
+	_"fmt"
 	"hakydll/app"
-	_ "net/http"
+	"net/http"
 )
 
 
@@ -13,8 +13,10 @@ func main(){
 	cfg:= haky.InitConfig()
 
 
+	mux:=cfg.Routes.Mux
+	mux.HandleFunc("/v1/",cfg.Routes.Handler.Healthcheckhandler)
 	
-	fmt.Println(cfg.Config.Port)
+	http.ListenAndServe(cfg.Config.Port,mux)
 }
 
 

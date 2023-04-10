@@ -2,6 +2,6 @@ package config
 
 
 type Config struct {
-	Port int
+	Port string
 	Env  string
 }
